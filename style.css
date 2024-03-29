@@ -1,0 +1,55 @@
+*{
+  font-family: "Poppins";
+}
+body{
+  margin:0;
+  padding:0;
+  background-color: gray;
+}
+div.container{
+  height: 100vh;
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div.wrapper{
+  box-sizing: border-box;
+  display:flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: 300px;
+  width:300px;
+  background-color: #fff;
+  padding-left: 40px;
+  padding-right:40px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+button#Scissor{
+  background-color: red;
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 10px 15px;
+}
+button#Rock{
+  background-color: orangered;
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 10px 15px;
+  
+}
+button#Paper{
+  background-color: navy;
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 10px 15px;
+}
+#result{
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
