@@ -1,0 +1,67 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+
+function FileUpload() {
+  const [jsonData, setJsonData] = useState(null);
+  const [error, setError] = useState(null);
+
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await axios.post('http://localhost:8000/upload/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        setJsonData(response.data);
+        setError(null);
+      } catch (err) {
+        setError(err.response?.data?.error || 'An error occurred');
+      }
+    }
+  };
+
+  const renderTable = () => {
+    if (!jsonData || jsonData.length === 0) return null;
+
+    // Get the headers from the first row of JSON data
+    const headers = Object.keys(jsonData[0]);
+
+    return (
+      <table border="1" cellPadding="5" cellSpacing="0">
+        <thead>
+          <tr>
+            {headers.map((header) => (
+              <th key={header}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {jsonData.map((row, index) => (
+            <tr key={index}>
+              {headers.map((header) => (
+                <td key={header}>{row[header]}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
+
+  return (
+    <div>
+      <input type="file" accept=".xlsx" onChange={handleFileUpload} />
+      {jsonData && renderTable()}
+      {error && (
+        <div style={{ color: 'red' }}>{error}</div>
+      )}
+    </div>
+  );
+}
+
+export default FileUpload;
